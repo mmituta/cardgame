@@ -1,4 +1,4 @@
-class Fight(val player: Player,  val enemy: Enemy, val deck: Deck) {
+class Fight(val player: Player, val enemies: List<Enemy>, val deck: Deck) {
     var hand = Hand()
     var turn = 1
     private val discardedPile = DiscardedPile()

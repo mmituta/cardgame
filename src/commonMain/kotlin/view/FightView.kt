@@ -5,6 +5,7 @@ import FightController
 import Hand
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Views
+import com.soywiz.korim.bitmap.Bitmap
 
 
 class FightView(fight: Fight, val views: Views) : Container() {
@@ -26,7 +27,7 @@ class FightView(fight: Fight, val views: Views) : Container() {
 
         addChild(PlayerView(fight.player))
 
-        val enemyView = EnemyView(fight.enemy)
+        val enemyView = EnemiesView(fight.enemies)
         enemyView.x = views.virtualWidthDouble - 150
         addChild(enemyView)
     }
