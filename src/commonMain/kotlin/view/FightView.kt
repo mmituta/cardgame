@@ -1,0 +1,51 @@
+package view
+
+import Fight
+import FightController
+import Hand
+import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.Views
+
+
+class FightView(fight: Fight, val views: Views) : Container() {
+    private val handView = HandView()
+
+    init {
+        val deckView = DeckView(fight.deck)
+        addChild(deckView)
+        deckView.x = 20.0
+        deckView.y = views.virtualHeightDouble - 200
+
+        val turnView = TurnView(fight)
+        addChild(turnView)
+        turnView.x = views.virtualWidthDouble / 2
+
+
+
+        addChild(handView);
+
+        addChild(PlayerView(fight.player))
+
+        val enemyView = EnemyView(fight.enemy)
+        enemyView.x = views.virtualWidthDouble - 150
+        addChild(enemyView)
+    }
+
+    fun drawHand(hand: Hand){
+        handView.setHand(hand)
+        handView.y = views.virtualHeightDouble - handView.height - 20
+    }
+
+    fun addCardPlayedListener(cardPlayedListener: FightController){
+        handView.addCardPlayedListener(cardPlayedListener)
+        val view = EndTurnView(cardPlayedListener)
+        view.x = views.virtualWidthDouble / 2
+        view.y = 150.0
+        addChild(view)
+    }
+
+    fun removeCardPlayedListener(cardPlayedListener: FightController){
+        handView.removeCardPlayedListener(cardPlayedListener)
+    }
+
+}
