@@ -7,7 +7,7 @@ import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.Text
 import com.soywiz.korim.bitmap.Bitmap
 
-class CardView(card: Card, cardBitmap: Bitmap) : Container(){
+class CardView(val card: Card, cardBitmap: Bitmap) : Container(){
     init {
 
         val cost = Text(card.cost.toString())

@@ -21,8 +21,6 @@ class FightView(fight: Fight, val views: Views, cardBitmap: Bitmap) : Container(
         addChild(turnView)
         turnView.x = views.virtualWidthDouble / 2
 
-
-
         addChild(handView)
 
         addChild(PlayerView(fight.player))
@@ -47,6 +45,10 @@ class FightView(fight: Fight, val views: Views, cardBitmap: Bitmap) : Container(
 
     fun removeCardPlayedListener(cardPlayedListener: FightController){
         handView.removeCardPlayedListener(cardPlayedListener)
+    }
+
+    fun removeFromHand(card: CardView) {
+        handView.removeCard(card)
     }
 
 }

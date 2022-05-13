@@ -1,6 +1,7 @@
+import view.CardView
 import view.FightView
 
-class FightController(val fightView: FightView, val fight: Fight) : CardPlayedListener {
+class FightController(val fightView: FightView, val fight: Fight) : CardViewListener {
 
 
     init {
@@ -13,7 +14,12 @@ class FightController(val fightView: FightView, val fight: Fight) : CardPlayedLi
         fightView.drawHand(fight.drawHand(5))
     }
 
-    override fun onCardPlayed(card: Card) {
-        fight.playCard(card)
+    override fun onHandCardTouched(cardView: CardView) {
+        val card = cardView.card
+        if( fight.ap >= card.cost ){
+            fight.playCard(card)
+            fightView.removeFromHand(cardView)
+        }
+
     }
 }
