@@ -8,8 +8,8 @@ import com.soywiz.korge.view.Views
 import com.soywiz.korim.bitmap.Bitmap
 
 
-class FightView(fight: Fight, val views: Views) : Container() {
-    private val handView = HandView()
+class FightView(fight: Fight, val views: Views, cardBitmap: Bitmap) : Container() {
+    private val handView = HandView(cardBitmap)
 
     init {
         val deckView = DeckView(fight.deck)
@@ -23,7 +23,7 @@ class FightView(fight: Fight, val views: Views) : Container() {
 
 
 
-        addChild(handView);
+        addChild(handView)
 
         addChild(PlayerView(fight.player))
 

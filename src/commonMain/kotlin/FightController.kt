@@ -7,6 +7,7 @@ class FightController(val fightView: FightView, val fight: Fight) : CardPlayedLi
         fightView.addCardPlayedListener(this)
     }
 
+
     fun startTurn(){
         fight.startTurn()
         fightView.drawHand(fight.drawHand(5))
@@ -14,6 +15,5 @@ class FightController(val fightView: FightView, val fight: Fight) : CardPlayedLi
 
     override fun onCardPlayed(card: Card) {
         fight.playCard(card)
-        println("card played "+ card.name)
     }
 }

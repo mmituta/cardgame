@@ -5,16 +5,17 @@ import com.soywiz.korio.file.std.resourcesVfs
 import view.*
 
 
-suspend fun main() = Korge(width = 512, height = 512, bgcolor = Colors["#2b2b2b"]) {
+suspend fun main() = Korge(width = 800, height = 600, bgcolor = Colors["#2b2b2b"]) {
 
     val player = Player(10, 3)
     val enemy = Enemy(4, 5, resourcesVfs["goblin.png"].readBitmap())
     val robot = Enemy(4, 5, resourcesVfs["goblin.png"].readBitmap())
+    val cardBitmap = resourcesVfs["card.png"].readBitmap()
     val deck = RandomDeckFactory().createDeck(20)
 
 
     val fight = Fight(player, listOf(enemy, robot), deck)
-    val fightView = FightView(fight, views)
+    val fightView = FightView(fight, views, cardBitmap)
     addChild(fightView)
 
     val controller = FightController(fightView, fight)
