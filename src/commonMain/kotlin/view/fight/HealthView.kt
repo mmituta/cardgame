@@ -10,10 +10,11 @@ import com.soywiz.korim.text.TextAlignment
 import com.soywiz.korma.geom.Rectangle
 
 private const val WIDTH = 200.0
-
 private const val HEIGHT = 50.0
 
-class HealthView(private val maxHp: Int,  var currentHp:Int = maxHp) : Container() {
+private const val TEXT_SIZE = 20.0
+
+class HealthView(private val maxHp: Int, var currentHp:Int = maxHp) : Container() {
 
     init {
         addChild(createBackground())
@@ -42,13 +43,13 @@ class HealthView(private val maxHp: Int,  var currentHp:Int = maxHp) : Container
     }
 
     private fun createBackground(): RoundRect {
-        return RoundRect(WIDTH, HEIGHT, 0.0, 0.0, Colors.BLACK, Colors.BLACK)
+        return rectangleOfColor(Colors.BLACK)
     }
 
     private fun createHpText(): Text {
-        val text = Text(formatHpText(), 20.0)
+        val text = Text(formatHpText(), TEXT_SIZE)
         text.alignment = TextAlignment.MIDDLE_CENTER
-        text.setTextBounds(Rectangle(0.0, 0.0, WIDTH, 20.0))
+        text.setTextBounds(Rectangle(0.0, 0.0, WIDTH, TEXT_SIZE))
         return text
     }
 

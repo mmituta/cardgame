@@ -5,9 +5,9 @@ import kotlin.math.max
 import view.CardView
 
 class CardZoomer(private val cardView: CardView, private val zoomLevel: Double = 1.5) {
-    private var cardX = 0.0
-    private var cardY = 0.0
-   private  var cardScale = 1.0
+    private var cardX: Double? = null
+    private var cardY: Double? = null
+    private var cardScale: Double? = null
 
 
     fun zoomIn() {
@@ -34,8 +34,10 @@ class CardZoomer(private val cardView: CardView, private val zoomLevel: Double =
     }
 
     fun zoomOut() {
-        cardView.x = cardX
-        cardView.y = cardY
-        cardView.scale = cardScale
+        if (cardX != null && cardY != null && cardScale != null) {
+            cardView.x = cardX!!
+            cardView.y = cardY!!
+            cardView.scale = cardScale!!
+        }
     }
 }

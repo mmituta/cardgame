@@ -13,6 +13,7 @@ suspend fun main() = Korge(width = 1920, height = 1080, bgcolor = Colors["#2b2b2
     bitmapRegistry.addEnemy(resourcesVfs["goblin.png"].readBitmap())
     bitmapRegistry.addCard(resourcesVfs["card.png"].readBitmap())
     bitmapRegistry.addPlayer(resourcesVfs["character.png"].readBitmap())
+    bitmapRegistry.addBackground(resourcesVfs["background.png"].readBitmap())
 
     val player = Player(10, 3)
     val enemy = Enemy(4, 5)

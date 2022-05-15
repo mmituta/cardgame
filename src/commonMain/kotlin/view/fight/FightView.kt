@@ -4,6 +4,7 @@ import Fight
 import FightController
 import Hand
 import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.Views
 import view.BitmapRegistry
 import view.CardView
@@ -15,6 +16,11 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
     private val handView = HandView(bitmapRegistry)
 
     init {
+        val background = Image(bitmapRegistry.getBackground())
+        addChild(background)
+        background.smoothing = false
+        background.scaledWidth = views.virtualWidthDouble
+        background.scaledHeight = views.virtualHeightDouble * 2 /3
         val deckView = DeckView(fight.deck)
         addChild(deckView)
         deckView.x = 20.0
@@ -23,19 +29,24 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
         val turnView = TurnView(fight)
         addChild(turnView)
         turnView.x = views.virtualWidthDouble / 2
-        addChild(PlayerView(fight.player, bitmapRegistry))
+        val playerView = PlayerView(fight.player, bitmapRegistry)
+        playerView.y = views.virtualHeightDouble /2 - playerView.scaledHeight
+        playerView.x = 50.0
+        addChild(playerView)
 
         addChild(handView)
 
 
         val enemyView = EnemiesView(fight.enemies, bitmapRegistry)
         enemyView.x = views.virtualWidthDouble - enemyView.scaledWidth - 50
+        enemyView.y = views.virtualHeightDouble/ 2 - enemyView.scaledHeight
         addChild(enemyView)
     }
 
     fun drawHand(hand: Hand){
         handView.setHand(hand)
-        handView.y = views.virtualHeightDouble - handView.height - 20
+        handView.y = views.virtualHeightDouble - handView.scaledHeight - 20
+        handView.x = views.virtualWidthDouble/2 - handView.scaledWidth /2
     }
 
     fun addCardPlayedListener(cardPlayedListener: FightController){
