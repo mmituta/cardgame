@@ -8,9 +8,9 @@ import com.soywiz.korim.text.TextAlignment
 import com.soywiz.korma.geom.Rectangle
 
 
-class CardView(val card: Card, cardBitmap: Bitmap) : Container(){
+class CardView(val card: Card, bitmapRegistry: BitmapRegistry) : Container(){
     init {
-        addChild(createBackground(cardBitmap))
+        addChild(createBackground(bitmapRegistry.getCard()))
         addChild(createCostText())
         addChild(createNameText())
         addChild(createDescriptionText())

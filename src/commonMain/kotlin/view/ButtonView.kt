@@ -15,12 +15,12 @@ import com.soywiz.korim.color.Colors
 import com.soywiz.korim.text.TextAlignment
 import com.soywiz.korma.geom.Rectangle
 
-class ButtonView(text: String, bitmap: Bitmap) : Container() {
+class ButtonView(text: String, bitmapRegistry: BitmapRegistry) : Container() {
     private val whiteOverlay = RoundRect(45.0, 25.0, 0.0)
 
     init {
         whiteOverlay.alpha = 0.4
-        val background = Image(bitmap)
+        val background = Image(bitmapRegistry.getButton())
         addChild(background)
         val textView = Text(text, 8.0)
         textView.alignment = TextAlignment.MIDDLE_CENTER

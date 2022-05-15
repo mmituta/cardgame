@@ -1,4 +1,4 @@
-package view
+package view.fight
 
 import Deck
 import com.soywiz.korge.view.*

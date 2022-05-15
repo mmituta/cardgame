@@ -1,4 +1,4 @@
-package view.hand
+package view.fight.hand
 
 import com.soywiz.korge.view.bringToTop
 import kotlin.math.max

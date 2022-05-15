@@ -1,6 +1,6 @@
 import com.soywiz.korim.bitmap.Bitmap
 
-class Enemy( var hp: Int, private val baseStrength: Int,  val bitmap: Bitmap) {
+class Enemy( var hp: Int, private val baseStrength: Int) {
 
     private val listeners = mutableListOf<EnemyDiedListener>()
 

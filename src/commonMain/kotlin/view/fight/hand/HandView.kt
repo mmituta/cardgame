@@ -1,4 +1,4 @@
-package view.hand
+package view.fight.hand
 
 import CardViewListener
 import Hand
@@ -7,9 +7,10 @@ import com.soywiz.korge.input.onOut
 import com.soywiz.korge.input.onOver
 import com.soywiz.korge.view.Container
 import com.soywiz.korim.bitmap.Bitmap
+import view.BitmapRegistry
 import view.CardView
 
-class HandView(private val cardBitmap: Bitmap) : Container() {
+class HandView(private val bitmapRegistry: BitmapRegistry) : Container() {
     private val cardListeners = mutableListOf<CardViewListener>()
 
 
@@ -17,7 +18,7 @@ class HandView(private val cardBitmap: Bitmap) : Container() {
         removeChildren()
         var x = 0.0
         for (card in hand.cards()) {
-            val view = CardView(card, cardBitmap)
+            val view = CardView(card, bitmapRegistry)
             view.x = x
             addChild(view)
             view.scale = 3.5

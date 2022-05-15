@@ -3,20 +3,26 @@ import com.soywiz.korim.color.*
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 import view.*
+import view.fight.FightView
 
 
 suspend fun main() = Korge(width = 1920, height = 1080, bgcolor = Colors["#2b2b2b"]) {
 
+    val bitmapRegistry = BitmapRegistry()
+    bitmapRegistry.addButton(resourcesVfs["button.png"].readBitmap())
+    bitmapRegistry.addEnemy(resourcesVfs["goblin.png"].readBitmap())
+    bitmapRegistry.addCard(resourcesVfs["card.png"].readBitmap())
+    bitmapRegistry.addPlayer(resourcesVfs["character.png"].readBitmap())
+
     val player = Player(10, 3)
-    val enemy = Enemy(4, 5, resourcesVfs["goblin.png"].readBitmap())
-    val robot = Enemy(4, 5, resourcesVfs["goblin.png"].readBitmap())
-    val cardBitmap = resourcesVfs["card.png"].readBitmap()
-    val buttonBitmap = resourcesVfs["button.png"].readBitmap()
+    val enemy = Enemy(4, 5)
+    val robot = Enemy(4, 5)
+
     val deck = RandomDeckFactory().createDeck(20)
 
 
     val fight = Fight(player, mutableListOf(enemy, robot), deck)
-    val fightView = FightView(fight, views, cardBitmap, buttonBitmap)
+    val fightView = FightView(fight, views, bitmapRegistry)
     addChild(fightView)
 
     val controller = FightController(fightView, fight)

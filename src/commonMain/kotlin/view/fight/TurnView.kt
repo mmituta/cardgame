@@ -1,4 +1,4 @@
-package view
+package view.fight
 
 import Fight
 import com.soywiz.korge.view.Container

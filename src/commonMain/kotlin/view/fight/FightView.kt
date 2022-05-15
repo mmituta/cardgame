@@ -1,16 +1,18 @@
-package view
+package view.fight
 
 import Fight
 import FightController
 import Hand
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Views
-import com.soywiz.korim.bitmap.Bitmap
-import view.hand.HandView
+import view.BitmapRegistry
+import view.CardView
+import view.fight.enemy.EnemiesView
+import view.fight.hand.HandView
 
 
-class FightView(fight: Fight, private val views: Views, cardBitmap: Bitmap, private val buttonBitmap: Bitmap) : Container() {
-    private val handView = HandView(cardBitmap)
+class FightView(fight: Fight, private val views: Views, private val bitmapRegistry: BitmapRegistry) : Container() {
+    private val handView = HandView(bitmapRegistry)
 
     init {
         val deckView = DeckView(fight.deck)
@@ -21,12 +23,12 @@ class FightView(fight: Fight, private val views: Views, cardBitmap: Bitmap, priv
         val turnView = TurnView(fight)
         addChild(turnView)
         turnView.x = views.virtualWidthDouble / 2
+        addChild(PlayerView(fight.player, bitmapRegistry))
 
         addChild(handView)
 
-        addChild(PlayerView(fight.player))
 
-        val enemyView = EnemiesView(fight.enemies)
+        val enemyView = EnemiesView(fight.enemies, bitmapRegistry)
         enemyView.x = views.virtualWidthDouble - 150
         addChild(enemyView)
     }
@@ -38,7 +40,7 @@ class FightView(fight: Fight, private val views: Views, cardBitmap: Bitmap, priv
 
     fun addCardPlayedListener(cardPlayedListener: FightController){
         handView.addCardPlayedListener(cardPlayedListener)
-        val view = EndTurnView(cardPlayedListener, buttonBitmap)
+        val view = EndTurnView(cardPlayedListener, bitmapRegistry)
         view.x = views.virtualWidthDouble / 2
         view.y = 150.0
         addChild(view)

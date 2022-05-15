@@ -1,5 +1,5 @@
 import view.CardView
-import view.FightView
+import view.fight.FightView
 
 class FightController(val fightView: FightView, val fight: Fight) : CardViewListener {
 

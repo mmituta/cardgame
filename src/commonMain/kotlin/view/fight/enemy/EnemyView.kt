@@ -1,12 +1,13 @@
-package view
+package view.fight.enemy
 
 import Enemy
 import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
+import view.BitmapRegistry
 
-class EnemyView(enemy: Enemy) : Container() {
+class EnemyView(enemy: Enemy, bitmapRegistry: BitmapRegistry) : Container() {
     init {
-        val image = Image(enemy.bitmap).scale(0.2)
+        val image = Image(bitmapRegistry.getEnemy()).scale(0.2)
 
         addChild(image)
         val centerX = getBounds().width / 2
