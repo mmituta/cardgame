@@ -9,7 +9,7 @@ import com.soywiz.korim.bitmap.Bitmap
 import view.hand.HandView
 
 
-class FightView(fight: Fight, val views: Views, cardBitmap: Bitmap) : Container() {
+class FightView(fight: Fight, private val views: Views, cardBitmap: Bitmap, private val buttonBitmap: Bitmap) : Container() {
     private val handView = HandView(cardBitmap)
 
     init {
@@ -38,7 +38,7 @@ class FightView(fight: Fight, val views: Views, cardBitmap: Bitmap) : Container(
 
     fun addCardPlayedListener(cardPlayedListener: FightController){
         handView.addCardPlayedListener(cardPlayedListener)
-        val view = EndTurnView(cardPlayedListener)
+        val view = EndTurnView(cardPlayedListener, buttonBitmap)
         view.x = views.virtualWidthDouble / 2
         view.y = 150.0
         addChild(view)

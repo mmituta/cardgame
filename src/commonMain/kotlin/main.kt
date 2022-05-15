@@ -11,11 +11,12 @@ suspend fun main() = Korge(width = 1920, height = 1080, bgcolor = Colors["#2b2b2
     val enemy = Enemy(4, 5, resourcesVfs["goblin.png"].readBitmap())
     val robot = Enemy(4, 5, resourcesVfs["goblin.png"].readBitmap())
     val cardBitmap = resourcesVfs["card.png"].readBitmap()
+    val buttonBitmap = resourcesVfs["button.png"].readBitmap()
     val deck = RandomDeckFactory().createDeck(20)
 
 
     val fight = Fight(player, mutableListOf(enemy, robot), deck)
-    val fightView = FightView(fight, views, cardBitmap)
+    val fightView = FightView(fight, views, cardBitmap, buttonBitmap)
     addChild(fightView)
 
     val controller = FightController(fightView, fight)

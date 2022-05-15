@@ -3,12 +3,11 @@ package view
 import FightController
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.RoundRect
-import com.soywiz.korim.color.Colors
+import com.soywiz.korim.bitmap.Bitmap
 
-class EndTurnView(controller: FightController) : Container() {
+class EndTurnView(controller: FightController, bitmap: Bitmap) : Container() {
     init {
-        val view = RoundRect(40.0, 40.0, 5.0, fill = Colors.GREEN)
+        val view = ButtonView("End turn", bitmap)
         view.onClick {
             controller.startTurn()
         }
