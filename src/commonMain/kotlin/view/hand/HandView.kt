@@ -14,13 +14,14 @@ class HandView(private val cardBitmap: Bitmap) : Container() {
 
 
     fun setHand(hand: Hand) {
-        children.clear()
+        removeChildren()
         var x = 0.0
         for (card in hand.cards()) {
             val view = CardView(card, cardBitmap)
             view.x = x
             addChild(view)
-            x += view.width * 0.8
+            view.scale = 3.5
+            x += view.scaledWidth * 0.8
             view.onClick {
                 cardListeners.forEach { listener -> listener.onHandCardTouched(view) }
             }
@@ -31,6 +32,7 @@ class HandView(private val cardBitmap: Bitmap) : Container() {
             view.onOut {
                 zoomer.zoomOut()
             }
+
 
         }
     }
@@ -46,6 +48,6 @@ class HandView(private val cardBitmap: Bitmap) : Container() {
     }
 
     fun removeCard(card: CardView) {
-        children.remove(card)
+        removeChild(card)
     }
 }
