@@ -6,6 +6,7 @@ import Hand
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Views
 import com.soywiz.korim.bitmap.Bitmap
+import view.hand.HandView
 
 
 class FightView(fight: Fight, val views: Views, cardBitmap: Bitmap) : Container() {

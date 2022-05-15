@@ -1,19 +1,22 @@
-package view
+package view.hand
 
 import CardViewListener
 import Hand
 import com.soywiz.korge.input.onClick
+import com.soywiz.korge.input.onOut
+import com.soywiz.korge.input.onOver
 import com.soywiz.korge.view.Container
 import com.soywiz.korim.bitmap.Bitmap
+import view.CardView
 
 class HandView(private val cardBitmap: Bitmap) : Container() {
-    val cardListeners = mutableListOf<CardViewListener>()
+    private val cardListeners = mutableListOf<CardViewListener>()
 
 
-    fun setHand(hand: Hand){
+    fun setHand(hand: Hand) {
         children.clear()
         var x = 0.0
-        for( card in hand.cards()){
+        for (card in hand.cards()) {
             val view = CardView(card, cardBitmap)
             view.x = x
             addChild(view)
@@ -21,16 +24,24 @@ class HandView(private val cardBitmap: Bitmap) : Container() {
             view.onClick {
                 cardListeners.forEach { listener -> listener.onHandCardTouched(view) }
             }
+            val zoomer = CardZoomer(view)
+            view.onOver {
+                zoomer.zoomIn()
+            }
+            view.onOut {
+                zoomer.zoomOut()
+            }
+
         }
     }
 
 
-    fun addCardPlayedListener(cardListener: CardViewListener){
+    fun addCardPlayedListener(cardListener: CardViewListener) {
         cardListeners.add(cardListener)
     }
 
 
-    fun removeCardPlayedListener(cardListener: CardViewListener){
+    fun removeCardPlayedListener(cardListener: CardViewListener) {
         cardListeners.remove(cardListener)
     }
 
