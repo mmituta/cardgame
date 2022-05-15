@@ -29,7 +29,7 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
 
 
         val enemyView = EnemiesView(fight.enemies, bitmapRegistry)
-        enemyView.x = views.virtualWidthDouble - 150
+        enemyView.x = views.virtualWidthDouble - enemyView.scaledWidth - 50
         addChild(enemyView)
     }
 
