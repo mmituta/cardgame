@@ -34,7 +34,6 @@ class CardZoomer(private val cardView: CardView, private val zoomLevel: Double =
     }
 
     fun zoomOut() {
-        cardView.scale = 1.0
         cardView.x = cardX
         cardView.y = cardY
         cardView.scale = cardScale
