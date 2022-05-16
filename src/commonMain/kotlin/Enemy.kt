@@ -10,7 +10,9 @@ class Enemy( var hp: Int, private val baseStrength: Int) {
 
     fun hitFor(dmg: Int){
         this.hp -= dmg
-        this.listeners.forEach { listener->listener.onEnemyDied(this) }
+        if( this.hp <= 0){
+            this.listeners.forEach { listener->listener.onEnemyDied(this) }
+        }
     }
 
     fun addListener(enemyDiedListener: EnemyDiedListener){

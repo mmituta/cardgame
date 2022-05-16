@@ -1,7 +1,7 @@
 class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck) : EnemyDiedListener{
     var hand = Hand()
     var turn = 1
-    private val deadEnemies = mutableListOf<Enemy>()
+    val deadEnemies = mutableListOf<Enemy>()
     private val discardedPile = DiscardedPile()
     var ap = 0
 

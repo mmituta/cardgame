@@ -2,7 +2,6 @@ package view.fight.enemy
 
 import Enemy
 import com.soywiz.korge.view.*
-import com.soywiz.korim.color.Colors
 import view.BitmapRegistry
 import view.fight.HealthView
 
@@ -18,6 +17,11 @@ class EnemyView(enemy: Enemy, bitmapRegistry: BitmapRegistry) : Container() {
 
         addUpdater {
             healthView.currentHp = enemy.hp
+            if (enemy.hp <= 0) {
+                healthView.currentHp = 0
+                image.alpha = 0.2
+            }
+
         }
     }
 }

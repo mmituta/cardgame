@@ -5,7 +5,6 @@ import FightController
 import Hand
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Image
-import com.soywiz.korge.view.RoundRect
 import com.soywiz.korge.view.Views
 import view.BitmapRegistry
 import view.CardView
@@ -23,12 +22,13 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
         deckView.x = 20.0
         deckView.y = views.virtualHeightDouble - 200
 
-
         addChild(createPlayersView(fight))
         addChild(createEnemiesView(fight))
 
         addChild(handView)
-
+        val view = ApView(fight)
+        view.y = views.virtualHeightDouble * 2 / 3
+        addChild(view)
         addChild(TopBarView(views, fight))
     }
 
@@ -49,7 +49,7 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
     }
 
     private fun createEnemiesView(fight: Fight): EnemiesView {
-        val enemyView = EnemiesView(fight.enemies, bitmapRegistry)
+        val enemyView = EnemiesView(fight, bitmapRegistry)
         enemyView.x = views.virtualWidthDouble - enemyView.scaledWidth - 50
         enemyView.y = views.virtualHeightDouble / 2 - enemyView.scaledHeight
         return enemyView
