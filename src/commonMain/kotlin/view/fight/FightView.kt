@@ -3,9 +3,7 @@ package view.fight
 import Fight
 import FightController
 import Hand
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.Image
-import com.soywiz.korge.view.Views
+import com.soywiz.korge.view.*
 import view.BitmapRegistry
 import view.CardView
 import view.fight.enemy.EnemiesView
@@ -17,10 +15,7 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
 
     init {
         addChild(createBackground())
-        val deckView = DeckView(fight.deck)
-        addChild(deckView)
-        deckView.x = 20.0
-        deckView.y = views.virtualHeightDouble - 200
+
 
         addChild(createPlayersView(fight))
         addChild(createEnemiesView(fight))
@@ -29,6 +24,13 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
         val view = ApView(fight)
         view.y = views.virtualHeightDouble * 2 / 3
         addChild(view)
+
+        val pileView = PileView(fight.deck, bitmapRegistry)
+        addChild(pileView)
+        pileView.alignTopToBottomOf(view, 10)
+
+
+
         addChild(TopBarView(views, fight))
     }
 

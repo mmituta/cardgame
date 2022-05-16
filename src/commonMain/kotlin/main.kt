@@ -14,10 +14,11 @@ suspend fun main() = Korge(width = 1920, height = 1080, bgcolor = Colors["#2b2b2
     bitmapRegistry.addCard(resourcesVfs["card.png"].readBitmap())
     bitmapRegistry.addPlayer(resourcesVfs["character.png"].readBitmap())
     bitmapRegistry.addBackground(resourcesVfs["background.png"].readBitmap())
+    bitmapRegistry.addCardBack(resourcesVfs["card_back.png"].readBitmap())
 
     val player = Player(10, 3)
-    val enemy = Enemy(4, 5)
-    val robot = Enemy(4, 5)
+    val enemy = Enemy(4, 1)
+    val robot = Enemy(4, 1)
 
     val deck = RandomDeckFactory().createDeck(20)
 

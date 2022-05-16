@@ -6,6 +6,11 @@ class Deck {
         deck.add(card)
     }
 
+
+    fun addAll(list: Collection<Card>){
+        deck.addAll(list)
+    }
+
     fun drawCardAt(nextInt: Int): Card {
         return deck.removeAt(nextInt)
     }

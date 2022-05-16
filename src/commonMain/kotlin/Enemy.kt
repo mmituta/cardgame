@@ -1,11 +1,9 @@
-import com.soywiz.korim.bitmap.Bitmap
-
 class Enemy( var hp: Int, private val baseStrength: Int) {
 
     private val listeners = mutableListOf<EnemyDiedListener>()
 
-    fun attack(): Int{
-        return baseStrength
+    fun attack(fight: Fight){
+        fight.player.hitFor(baseStrength)
     }
 
     fun hitFor(dmg: Int){

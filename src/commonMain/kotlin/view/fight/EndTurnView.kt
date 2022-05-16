@@ -10,7 +10,7 @@ class EndTurnView(controller: FightController, bitmapRegistry: BitmapRegistry) :
     init {
         val view = ButtonView("End turn", bitmapRegistry)
         view.onClick {
-            controller.startTurn()
+            controller.endTurn()
         }
         addChild(view)
     }

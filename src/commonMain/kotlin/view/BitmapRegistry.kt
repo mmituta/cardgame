@@ -26,6 +26,10 @@ class BitmapRegistry {
         map["enemy"] = bitmap
     }
 
+    fun addCardBack(bitmap: Bitmap){
+        map["cardBack"] = bitmap
+    }
+
     fun getPlayer(): Bitmap{
         return map["player"]!!
     }
@@ -43,4 +47,5 @@ class BitmapRegistry {
     }
 
     fun getBackground():Bitmap = map["background"]!!
+    fun getCardBack(): Bitmap = map["cardBack"]!!
 }

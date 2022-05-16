@@ -11,7 +11,19 @@ class FightController(val fightView: FightView, val fight: Fight) : CardViewList
 
     fun startTurn(){
         fight.startTurn()
+        if(fight.deck.size() < 5 ){
+            val list = fight.discardedPile.clearAndReturnAll()
+            // TODO shuffle
+            fight.deck.addAll(list)
+        }
         fightView.drawHand(fight.drawHand(5))
+    }
+
+    fun endTurn(){
+        fight.enemies.forEach { enemy-> enemy.attack(fight) }
+        fight.discardedPile.addAll( fight.hand.clearAndReturnAll() )
+        startTurn()
+
     }
 
     override fun onHandCardTouched(cardView: CardView) {
@@ -19,6 +31,7 @@ class FightController(val fightView: FightView, val fight: Fight) : CardViewList
         if( fight.ap >= card.cost ){
             fight.playCard(card)
             fightView.removeFromHand(cardView)
+
         }
 
     }

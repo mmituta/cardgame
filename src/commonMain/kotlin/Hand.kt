@@ -16,4 +16,11 @@ class Hand(cards: List<Card> = emptyList()) {
     fun cards(): List<Card>{
         return this.cards.toList()
     }
+
+    fun clearAndReturnAll(): List<Card> {
+        val toReturn = cards.toList()
+        cards.clear()
+
+        return toReturn
+    }
 }

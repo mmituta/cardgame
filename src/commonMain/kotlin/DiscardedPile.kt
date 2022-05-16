@@ -12,4 +12,8 @@ class DiscardedPile {
 
         return toReturn;
     }
+
+    fun addAll(toAdd: Collection<Card>) {
+        cards.addAll(toAdd)
+    }
 }
