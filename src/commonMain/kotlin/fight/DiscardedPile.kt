@@ -1,7 +1,7 @@
 package fight
 
 import cards.Card
-
+// TODO: refactor this and deck as "piles"
 class DiscardedPile {
 
     val cards = mutableListOf<Card>()
