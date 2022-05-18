@@ -8,6 +8,7 @@ import com.soywiz.korge.input.onOver
 import com.soywiz.korge.view.Container
 import view.BitmapRegistry
 import view.CardView
+import view.fight.ViewZoomer
 
 class HandView(private val bitmapRegistry: BitmapRegistry) : Container() {
     private val cardListeners = mutableListOf<CardViewListener>()
@@ -25,7 +26,7 @@ class HandView(private val bitmapRegistry: BitmapRegistry) : Container() {
             view.onClick {
                 cardListeners.forEach { listener -> listener.onHandCardTouched(view) }
             }
-            val zoomer = CardZoomer(view)
+            val zoomer = ViewZoomer(view)
             view.onOver {
                 zoomer.zoomIn()
             }

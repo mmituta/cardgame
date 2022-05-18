@@ -1,10 +1,11 @@
-package view.fight.hand
+package view.fight
 
+import com.soywiz.korge.view.View
 import com.soywiz.korge.view.bringToTop
 import kotlin.math.max
 import view.CardView
 
-class CardZoomer(private val cardView: CardView, private val zoomLevel: Double = 1.5) {
+class ViewZoomer(private val cardView: View, private val zoomLevel: Double = 1.5) {
     private var cardX: Double? = null
     private var cardY: Double? = null
     private var cardScale: Double? = null

@@ -9,11 +9,12 @@ class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck)
     private val deadEnemies = mutableListOf<Enemy>()
     val discardedPile = DiscardedPile()
     var ap = 0
-
+    var enemySelector: EnemyProvider? = null
     init {
         ap = player.ap
         enemies.forEach { enemy -> enemy.addListener(this) }
     }
+
 
     fun drawHand(number: Int): Hand {
         hand = deck.drawHand(number)
@@ -21,7 +22,6 @@ class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck)
     }
 
     fun playCard(card: Card) {
-
         if (card.play(this)) {
             hand.removeCard(card)
             ap -= card.cost
@@ -37,6 +37,17 @@ class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck)
     override fun onEnemyDied(enemy: Enemy) {
         enemies.remove(enemy)
         deadEnemies.add(enemy)
+    }
+
+    fun selectEnemy(): Enemy? {
+        if( enemies.size == 1){
+            return enemies[0]
+        }
+
+        if(enemySelector != null) {
+            return enemySelector?.selectEnemy()
+        }
+        return null
     }
 
 

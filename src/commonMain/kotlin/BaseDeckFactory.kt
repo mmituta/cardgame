@@ -1,4 +1,5 @@
 import cards.RoundSlash
+import cards.BlindSlashCard
 import cards.SlashCard
 
 class BaseDeckFactory {
@@ -6,8 +7,9 @@ class BaseDeckFactory {
         val deck = Deck()
 
         for (i in 0 until size) {
-            deck.add(SlashCard())
+            deck.add(BlindSlashCard())
             deck.add(RoundSlash())
+            deck.add(SlashCard())
         }
         return deck
     }

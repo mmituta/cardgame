@@ -6,14 +6,16 @@ import com.soywiz.korge.view.*
 import fight.HitListener
 import view.BitmapRegistry
 import view.fight.HealthView
+import view.fight.ViewHiglighter
 import view.fight.effects.BloodEffectView
 import view.fight.effects.SlashEffectView
 
 class EnemyView(enemy: Enemy, val bitmapRegistry: BitmapRegistry) : Container(), HitListener {
     val bloodEffectView = BloodEffectView(bitmapRegistry)
-
+    val image = Image(bitmapRegistry.getEnemy()).scale(0.5)
+    var higlighter = ViewHiglighter(image)
     init {
-        val image = Image(bitmapRegistry.getEnemy()).scale(0.5)
+
         enemy.setHitListener(this)
         addChild(image)
         val healthView = HealthView(enemy.health)
@@ -28,6 +30,14 @@ class EnemyView(enemy: Enemy, val bitmapRegistry: BitmapRegistry) : Container(),
                 image.alpha = 0.2
             }
         }
+    }
+
+    fun highlight(){
+        higlighter.select()
+    }
+
+    fun unHighlight(){
+        higlighter.unselect()
     }
 
     override fun onHit(attack: Attack) {

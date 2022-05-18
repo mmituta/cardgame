@@ -1,10 +1,10 @@
 package view.fight
 
-import fight.Fight
-import fight.FightController
-import fight.Hand
+import Attack
 import com.soywiz.korge.view.*
 import com.soywiz.korge.view.filter.BlurFilter
+import com.soywiz.korma.geom.Point
+import fight.*
 import view.BitmapRegistry
 import view.CardView
 import view.fight.enemy.EnemiesView
@@ -13,17 +13,20 @@ import view.fight.hand.HandView
 
 private const val BOTTOM_PADDING = 20
 
-class FightView(fight: Fight, private val views: Views, private val bitmapRegistry: BitmapRegistry) : Container() {
+class FightView(fight: Fight, private val views: Views, private val bitmapRegistry: BitmapRegistry) : Container(), EnemyProvider {
     private val handView = HandView(bitmapRegistry)
     private val battleContainer = Container()
     private val overlayView = OverlayView(views)
+    val enemiesView = createEnemiesView(fight)
+
     init {
+        fight.enemySelector = this
         addChild(battleContainer)
         battleContainer.addChild(createBackground())
 
 
         battleContainer.addChild(createPlayersView(fight))
-        battleContainer.addChild(createEnemiesView(fight))
+        battleContainer.addChild(enemiesView)
 
         battleContainer.addChild(handView)
         val view = ApView(fight)
@@ -92,6 +95,13 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
     fun onFightLost() {
         battleContainer.filter = BlurFilter(10.0)
         overlayView.setMessage("You lost")
+    }
+
+    override fun selectEnemy(): Enemy {
+        addComponent(SelectEnemyComponent(Point(0.0, 0.0), this))
+        enemiesView.setSelectingState()
+
+        return Enemy(1, Attack("", 1))
     }
 
 }
