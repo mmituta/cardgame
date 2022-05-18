@@ -27,11 +27,9 @@ class FightController(val fightView: FightView, val fight: Fight) : CardViewList
         fight.discardedPile.addAll( fight.hand.clearAndReturnAll() )
         if( fight.enemies.isEmpty()){
             fightView.onFightWon()
-            println("You won")
         }
         if( fight.player.isDead()){
             fightView.onFightLost()
-            println("You lose")
         }
         startTurn()
 

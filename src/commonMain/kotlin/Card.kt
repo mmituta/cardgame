@@ -7,7 +7,7 @@ data class Card(val cost: Int, val name: String, val description: String = "") {
         if( fight.enemies.isEmpty()){
             return false
         }
-        fight.enemies[getEnemyIndex(fight.enemies)].hitFor(3)
+        fight.enemies[getEnemyIndex(fight.enemies)].hit(Attack("Slash", 3))
         return true
     }
 

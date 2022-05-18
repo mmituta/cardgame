@@ -1,6 +1,8 @@
 package view
 
 import com.soywiz.korim.bitmap.Bitmap
+import com.soywiz.korim.format.readBitmap
+import com.soywiz.korio.file.std.resourcesVfs
 
 class BitmapRegistry {
     private val map: MutableMap<String, Bitmap> = mutableMapOf()
@@ -48,4 +50,9 @@ class BitmapRegistry {
 
     fun getBackground():Bitmap = map["background"]!!
     fun getCardBack(): Bitmap = map["cardBack"]!!
+    suspend fun addBitmap(key: String, fileName: String) {
+       map[key] = resourcesVfs[fileName].readBitmap()
+    }
+
+    fun getBitmap(key: String) = map[key]!!
 }

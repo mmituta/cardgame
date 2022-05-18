@@ -1,12 +1,18 @@
 package fight
 
-class Player ( hp: Int, val ap: Int): Fighter {
-    val health: Health = Health(hp)
+import Attack
 
-    override fun hitFor(dmg: Int) {
-        health.hitFor(dmg)
+class Player(hp: Int, val ap: Int) : Fighter {
+    val health: Health = Health(hp)
+    private var hitListener: HitListener? = null
+    override fun isDead() = health.isEmpty()
+    override fun hit(attack: Attack) {
+        hitListener?.onHit(attack)
+        health.hitFor(attack.strength)
     }
 
-    override fun isDead() = health.isEmpty()
+    fun setHitListener(hitListener: HitListener){
+        this.hitListener = hitListener
+    }
 
 }

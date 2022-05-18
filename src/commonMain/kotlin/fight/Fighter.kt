@@ -1,6 +1,8 @@
 package fight
 
+import Attack
+
 interface Fighter {
-    fun hitFor(dmg: Int)
     fun isDead(): Boolean
+    fun hit(attack: Attack)
 }
