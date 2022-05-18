@@ -1,3 +1,4 @@
+import cards.Card
 import fight.Hand
 import kotlin.random.Random
 

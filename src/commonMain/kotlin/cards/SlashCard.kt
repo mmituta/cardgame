@@ -1,9 +1,12 @@
+package cards
+
+import Attack
 import fight.Enemy
 import fight.Fight
 import kotlin.random.Random
 
-data class Card(val cost: Int, val name: String, val description: String = "") {
-    fun play(fight: Fight): Boolean {
+class SlashCard: Card(1, "Blind slash", "Attacks a random enemy for 3 DMG") {
+    override fun play(fight: Fight): Boolean {
         if( fight.enemies.isEmpty()){
             return false
         }

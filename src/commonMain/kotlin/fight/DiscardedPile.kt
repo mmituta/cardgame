@@ -1,6 +1,6 @@
 package fight
 
-import Card
+import cards.Card
 
 class DiscardedPile {
 

@@ -1,6 +1,6 @@
 package fight
 
-import Card
+import cards.Card
 
 class Hand(cards: List<Card> = emptyList()) {
     private var cards: MutableList<Card>

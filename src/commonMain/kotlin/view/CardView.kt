@@ -1,6 +1,6 @@
 package view
 
-import Card
+import cards.Card
 import com.soywiz.korge.view.*
 
 import com.soywiz.korim.bitmap.Bitmap

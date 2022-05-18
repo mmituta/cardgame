@@ -1,6 +1,6 @@
 package fight
 
-import Card
+import cards.Card
 import Deck
 
 class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck) : EnemyDiedListener {

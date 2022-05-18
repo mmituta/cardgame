@@ -1,7 +1,4 @@
 import com.soywiz.korge.*
-import com.soywiz.korge.animate.playAndWaitEvent
-import com.soywiz.korge.view.SpriteAnimation
-import com.soywiz.korge.view.sprite
 import com.soywiz.korim.color.*
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
@@ -11,7 +8,6 @@ import fight.FightController
 import fight.Player
 import view.*
 import view.fight.FightView
-import view.fight.effects.SlashEffectView
 
 
 suspend fun main() = Korge(width = 1920, height = 1080, bgcolor = Colors["#2b2b2b"]) {
@@ -30,7 +26,7 @@ suspend fun main() = Korge(width = 1920, height = 1080, bgcolor = Colors["#2b2b2
     val enemy = Enemy(4, Attack("Slash", 1))
     val robot = Enemy(4, Attack("Slash", 1))
 
-    val deck = RandomDeckFactory().createDeck(20)
+    val deck = BaseDeckFactory().createDeck(20)
 
 
     val fight = Fight(player, mutableListOf(enemy, robot), deck)
