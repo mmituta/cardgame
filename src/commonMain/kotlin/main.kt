@@ -2,6 +2,10 @@ import com.soywiz.korge.*
 import com.soywiz.korim.color.*
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
+import fight.Enemy
+import fight.Fight
+import fight.FightController
+import fight.Player
 import view.*
 import view.fight.FightView
 
@@ -27,9 +31,9 @@ suspend fun main() = Korge(width = 1920, height = 1080, bgcolor = Colors["#2b2b2
     val fightView = FightView(fight, views, bitmapRegistry)
     addChild(fightView)
 
+
     val controller = FightController(fightView, fight)
     controller.startTurn()
-
 
 }
 

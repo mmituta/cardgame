@@ -1,6 +1,6 @@
 package view.fight.enemy
 
-import Enemy
+import fight.Enemy
 import com.soywiz.korge.view.*
 import view.BitmapRegistry
 import view.fight.HealthView
@@ -10,15 +10,13 @@ class EnemyView(enemy: Enemy, bitmapRegistry: BitmapRegistry) : Container() {
         val image = Image(bitmapRegistry.getEnemy()).scale(0.5)
 
         addChild(image)
-        val healthView = HealthView(enemy.hp)
+        val healthView = HealthView(enemy.health)
         addChild(healthView)
         healthView.y = image.scaledHeight + 10
 
 
         addUpdater {
-            healthView.currentHp = enemy.hp
-            if (enemy.hp <= 0) {
-                healthView.currentHp = 0
+            if (enemy.isDead()) {
                 image.alpha = 0.2
             }
 

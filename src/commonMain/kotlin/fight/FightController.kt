@@ -1,3 +1,6 @@
+package fight
+
+import view.CardViewListener
 import view.CardView
 import view.fight.FightView
 
@@ -22,6 +25,14 @@ class FightController(val fightView: FightView, val fight: Fight) : CardViewList
     fun endTurn(){
         fight.enemies.forEach { enemy-> enemy.attack(fight) }
         fight.discardedPile.addAll( fight.hand.clearAndReturnAll() )
+        if( fight.enemies.isEmpty()){
+            fightView.onFightWon()
+            println("You won")
+        }
+        if( fight.player.isDead()){
+            fightView.onFightLost()
+            println("You lose")
+        }
         startTurn()
 
     }

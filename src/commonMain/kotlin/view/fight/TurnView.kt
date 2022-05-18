@@ -1,6 +1,6 @@
 package view.fight
 
-import Fight
+import fight.Fight
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Text
 import com.soywiz.korge.view.addUpdater

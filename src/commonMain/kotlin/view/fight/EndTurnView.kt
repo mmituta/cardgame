@@ -1,6 +1,6 @@
 package view.fight
 
-import FightController
+import fight.FightController
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.view.Container
 import view.BitmapRegistry

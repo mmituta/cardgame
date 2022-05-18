@@ -1,3 +1,5 @@
+import fight.Enemy
+import fight.Fight
 import kotlin.random.Random
 
 data class Card(val cost: Int, val name: String, val description: String = "") {

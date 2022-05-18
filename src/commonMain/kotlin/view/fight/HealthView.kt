@@ -8,27 +8,28 @@ import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korim.text.TextAlignment
 import com.soywiz.korma.geom.Rectangle
+import fight.Health
 
 private const val WIDTH = 200.0
 private const val HEIGHT = 50.0
 
 private const val TEXT_SIZE = 20.0
 
-class HealthView(private val maxHp: Int, var currentHp:Int = maxHp) : Container() {
+class HealthView(private val health: Health) : Container() {
 
     init {
         addChild(createBackground())
-        val health = rectangleOfColor(Colors.RED)
-        addChild(health)
+        val healthView = rectangleOfColor(Colors.RED)
+        addChild(healthView)
         addChild(createBorder())
 
         val text = createHpText()
-        text.y = health.scaledHeight + 5
+        text.y = healthView.scaledHeight + 5
         addChild(text)
 
         addUpdater {
             text.text = formatHpText()
-            health.scaledWidth = WIDTH * currentHp / maxHp
+            healthView.scaledWidth = WIDTH * health.currentHp / health.initialHp
         }
     }
 
@@ -53,6 +54,6 @@ class HealthView(private val maxHp: Int, var currentHp:Int = maxHp) : Container(
         return text
     }
 
-    private fun formatHpText() = "$currentHp/$maxHp"
+    private fun formatHpText() = "${health.currentHp}/${health.initialHp}"
 
 }

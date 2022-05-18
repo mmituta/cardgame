@@ -1,6 +1,6 @@
 package view.fight
 
-import Fight
+import fight.Fight
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.RoundRect
 import com.soywiz.korge.view.Views

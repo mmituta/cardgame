@@ -1,3 +1,7 @@
+package fight
+
+import Card
+
 class DiscardedPile {
 
     val cards = mutableListOf<Card>()
@@ -10,7 +14,7 @@ class DiscardedPile {
         val toReturn = cards.toList()
         cards.clear()
 
-        return toReturn;
+        return toReturn
     }
 
     fun addAll(toAdd: Collection<Card>) {

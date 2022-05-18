@@ -1,8 +1,13 @@
-class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck) : EnemyDiedListener{
+package fight
+
+import Card
+import Deck
+
+class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck) : EnemyDiedListener {
     var hand = Hand()
     var turn = 0
-    val deadEnemies = mutableListOf<Enemy>()
-     val discardedPile = DiscardedPile()
+    private val deadEnemies = mutableListOf<Enemy>()
+    val discardedPile = DiscardedPile()
     var ap = 0
 
     init {

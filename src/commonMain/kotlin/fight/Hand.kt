@@ -1,3 +1,7 @@
+package fight
+
+import Card
+
 class Hand(cards: List<Card> = emptyList()) {
     private var cards: MutableList<Card>
 

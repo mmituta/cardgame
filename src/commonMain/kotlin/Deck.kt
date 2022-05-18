@@ -1,3 +1,4 @@
+import fight.Hand
 import kotlin.random.Random
 
 class Deck {
@@ -19,7 +20,7 @@ class Deck {
         return deck.size
     }
 
-    fun drawHand(number: Int): Hand{
+    fun drawHand(number: Int): Hand {
         val hand = mutableListOf<Card>()
         for(i in 0 until number){
             hand.add(drawCardAt(Random.nextInt(0, deck.size)))

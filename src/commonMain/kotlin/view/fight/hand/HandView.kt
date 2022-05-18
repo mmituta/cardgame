@@ -1,12 +1,11 @@
 package view.fight.hand
 
-import CardViewListener
-import Hand
+import view.CardViewListener
+import fight.Hand
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.input.onOut
 import com.soywiz.korge.input.onOver
 import com.soywiz.korge.view.Container
-import com.soywiz.korim.bitmap.Bitmap
 import view.BitmapRegistry
 import view.CardView
 
