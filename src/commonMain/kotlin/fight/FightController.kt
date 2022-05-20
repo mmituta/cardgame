@@ -1,5 +1,6 @@
 package fight
 
+import com.soywiz.korio.async.runBlockingNoJs
 import view.CardViewListener
 import view.CardView
 import view.fight.FightView
@@ -12,9 +13,9 @@ class FightController(val fightView: FightView, val fight: Fight) : CardViewList
     }
 
 
-    fun startTurn(){
+    fun startTurn() {
         fight.startTurn()
-        if(fight.deck.size() < 5 ){
+        if (fight.deck.size() < 5) {
             val list = fight.discardedPile.clearAndReturnAll()
             // TODO shuffle
             fight.deck.addAll(list)
@@ -22,13 +23,13 @@ class FightController(val fightView: FightView, val fight: Fight) : CardViewList
         fightView.drawHand(fight.drawHand(5))
     }
 
-    fun endTurn(){
-        fight.enemies.forEach { enemy-> enemy.attack(fight) }
-        fight.discardedPile.addAll( fight.hand.clearAndReturnAll() )
-        if( fight.enemies.isEmpty()){
+    fun endTurn() {
+        fight.enemies.forEach { enemy -> enemy.attack(fight) }
+        fight.discardedPile.addAll(fight.hand.clearAndReturnAll())
+        if (fight.enemies.isEmpty()) {
             fightView.onFightWon()
         }
-        if( fight.player.isDead()){
+        if (fight.player.isDead()) {
             fightView.onFightLost()
         }
         startTurn()
@@ -37,11 +38,8 @@ class FightController(val fightView: FightView, val fight: Fight) : CardViewList
 
     override fun onHandCardTouched(cardView: CardView) {
         val card = cardView.card
-        if( fight.ap >= card.cost ){
-            fight.playCard(card)
-            fightView.removeFromHand(cardView)
-
+        if (fight.ap >= card.cost) {
+            fight.playCard(card) { fightView.removeFromHand(cardView) }
         }
-
     }
 }

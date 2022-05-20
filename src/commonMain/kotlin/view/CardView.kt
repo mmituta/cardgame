@@ -9,6 +9,7 @@ import com.soywiz.korma.geom.Rectangle
 
 
 class CardView(val card: Card, bitmapRegistry: BitmapRegistry) : Container(){
+
     init {
         addChild(createBackground(bitmapRegistry.getCard()))
         addChild(createCostText())
@@ -48,6 +49,4 @@ class CardView(val card: Card, bitmapRegistry: BitmapRegistry) : Container(){
         cost.y = 10.5
         return cost
     }
-
-
 }

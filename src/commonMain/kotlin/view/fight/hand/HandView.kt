@@ -6,13 +6,14 @@ import com.soywiz.korge.input.onClick
 import com.soywiz.korge.input.onOut
 import com.soywiz.korge.input.onOver
 import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.bringToTop
 import view.BitmapRegistry
 import view.CardView
 import view.fight.ViewZoomer
 
 class HandView(private val bitmapRegistry: BitmapRegistry) : Container() {
     private val cardListeners = mutableListOf<CardViewListener>()
-
+    var activeCard: CardView? = null
 
     fun setHand(hand: Hand) {
         removeChildren()
@@ -24,14 +25,21 @@ class HandView(private val bitmapRegistry: BitmapRegistry) : Container() {
             view.scale = 3.5
             x += view.scaledWidth * 0.8
             view.onClick {
-                cardListeners.forEach { listener -> listener.onHandCardTouched(view) }
+                if( activeCard == null){
+                    activeCard = view
+                    cardListeners.forEach { listener -> listener.onHandCardTouched(view) }
+                }
             }
             val zoomer = ViewZoomer(view)
             view.onOver {
-                zoomer.zoomIn()
+                if (activeCard == null) {
+                    zoomer.zoomIn()
+                }
             }
             view.onOut {
-                zoomer.zoomOut()
+                if (activeCard == null) {
+                    zoomer.zoomOut()
+                }
             }
 
 
@@ -50,5 +58,6 @@ class HandView(private val bitmapRegistry: BitmapRegistry) : Container() {
 
     fun removeCard(card: CardView) {
         removeChild(card)
+        activeCard = null
     }
 }

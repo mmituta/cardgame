@@ -10,7 +10,7 @@ import view.fight.ViewHiglighter
 import view.fight.effects.BloodEffectView
 import view.fight.effects.SlashEffectView
 
-class EnemyView(enemy: Enemy, val bitmapRegistry: BitmapRegistry) : Container(), HitListener {
+class EnemyView(val enemy: Enemy, val bitmapRegistry: BitmapRegistry) : Container(), HitListener {
     val bloodEffectView = BloodEffectView(bitmapRegistry)
     val image = Image(bitmapRegistry.getEnemy()).scale(0.5)
     var higlighter = ViewHiglighter(image)

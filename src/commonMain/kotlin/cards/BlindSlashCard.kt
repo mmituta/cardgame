@@ -5,13 +5,12 @@ import fight.Enemy
 import fight.Fight
 import kotlin.random.Random
 
-class BlindSlashCard: Card(1, "Blind slash", "Attacks a random enemy for 3 DMG") {
-    override fun play(fight: Fight): Boolean {
-        if( fight.enemies.isEmpty()){
-            return false
+class BlindSlashCard : Card(1, "Blind slash", "Attacks a random enemy for 3 DMG") {
+    override fun play(fight: Fight, cardPlayedCallback: CardPlayedCallback) {
+        if (fight.enemies.isNotEmpty()) {
+            fight.enemies[getEnemyIndex(fight.enemies)].hit(Attack("Slash", 3))
+            cardPlayedCallback.onCardPlayed()
         }
-        fight.enemies[getEnemyIndex(fight.enemies)].hit(Attack("Slash", 3))
-        return true
     }
 
     private fun getEnemyIndex(enemies: List<Enemy>): Int {

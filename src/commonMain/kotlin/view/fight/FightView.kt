@@ -1,6 +1,5 @@
 package view.fight
 
-import Attack
 import com.soywiz.korge.view.*
 import com.soywiz.korge.view.filter.BlurFilter
 import com.soywiz.korma.geom.Point
@@ -13,11 +12,12 @@ import view.fight.hand.HandView
 
 private const val BOTTOM_PADDING = 20
 
-class FightView(fight: Fight, private val views: Views, private val bitmapRegistry: BitmapRegistry) : Container(), EnemyProvider {
+class FightView(fight: Fight, private val views: Views, private val bitmapRegistry: BitmapRegistry) : Container(),
+    EnemyProvider {
     private val handView = HandView(bitmapRegistry)
     private val battleContainer = Container()
     private val overlayView = OverlayView(views)
-    val enemiesView = createEnemiesView(fight)
+    private val enemiesView = createEnemiesView(fight)
 
     init {
         fight.enemySelector = this
@@ -65,13 +65,13 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
         return enemyView
     }
 
-    fun drawHand(hand: Hand){
+    fun drawHand(hand: Hand) {
         handView.setHand(hand)
         handView.y = views.virtualHeightDouble - handView.scaledHeight - BOTTOM_PADDING
-        handView.x = views.virtualWidthDouble/2 - handView.scaledWidth /2
+        handView.x = views.virtualWidthDouble / 2 - handView.scaledWidth / 2
     }
 
-    fun addCardPlayedListener(cardPlayedListener: FightController){
+    fun addCardPlayedListener(cardPlayedListener: FightController) {
         handView.addCardPlayedListener(cardPlayedListener)
         val view = EndTurnView(cardPlayedListener, bitmapRegistry)
         view.x = views.virtualWidthDouble - view.scaledWidth - 5
@@ -79,7 +79,7 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
         addChild(view)
     }
 
-    fun removeCardPlayedListener(cardPlayedListener: FightController){
+    fun removeCardPlayedListener(cardPlayedListener: FightController) {
         handView.removeCardPlayedListener(cardPlayedListener)
     }
 
@@ -97,11 +97,15 @@ class FightView(fight: Fight, private val views: Views, private val bitmapRegist
         overlayView.setMessage("You lost")
     }
 
-    override fun selectEnemy(): Enemy {
-        addComponent(SelectEnemyComponent(Point(0.0, 0.0), this))
-        enemiesView.setSelectingState()
-
-        return Enemy(1, Attack("", 1))
+    override fun selectEnemy(callback: SelectEnemyCallback) {
+        val activeCard: CardView = handView.activeCard!!
+        val selectEnemyComponent = SelectEnemyComponent(activeCard, handView)
+        addComponent(selectEnemyComponent)
+        enemiesView.setSelectingState { enemy ->
+            callback.onSelected(enemy)
+            selectEnemyComponent.clear()
+            removeComponent(selectEnemyComponent)
+        }
     }
 
 }

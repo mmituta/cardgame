@@ -2,6 +2,7 @@ package fight
 
 import cards.Card
 import Deck
+import cards.CardPlayedCallback
 
 class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck) : EnemyDiedListener {
     var hand = Hand()
@@ -10,6 +11,7 @@ class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck)
     val discardedPile = DiscardedPile()
     var ap = 0
     var enemySelector: EnemyProvider? = null
+
     init {
         ap = player.ap
         enemies.forEach { enemy -> enemy.addListener(this) }
@@ -21,11 +23,13 @@ class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck)
         return hand
     }
 
-    fun playCard(card: Card) {
-        if (card.play(this)) {
+    fun playCard(card: Card, cardPlayedCallback: CardPlayedCallback) {
+        card.play(this
+        ) {
             hand.removeCard(card)
             ap -= card.cost
             discardedPile.addCard(card)
+            cardPlayedCallback.onCardPlayed()
         }
     }
 
@@ -39,15 +43,14 @@ class Fight(val player: Player, val enemies: MutableList<Enemy>, val deck: Deck)
         deadEnemies.add(enemy)
     }
 
-    fun selectEnemy(): Enemy? {
-        if( enemies.size == 1){
-            return enemies[0]
+    fun selectEnemy(enemySelectEnemyCallback: SelectEnemyCallback) {
+        if (enemies.size == 1) {
+            enemySelectEnemyCallback.onSelected(enemies[0])
         }
 
-        if(enemySelector != null) {
-            return enemySelector?.selectEnemy()
+        if (enemySelector != null) {
+             enemySelector?.selectEnemy(enemySelectEnemyCallback)
         }
-        return null
     }
 
 

@@ -9,7 +9,7 @@ class ViewZoomer(private val cardView: View, private val zoomLevel: Double = 1.5
     private var cardX: Double? = null
     private var cardY: Double? = null
     private var cardScale: Double? = null
-
+    private var zIndex: Int? = null
 
     fun zoomIn() {
         cardX = cardView.x
@@ -19,6 +19,7 @@ class ViewZoomer(private val cardView: View, private val zoomLevel: Double = 1.5
         cardView.x = scaleX()
         cardView.y = scaleY()
         cardView.scale *= zoomLevel
+        zIndex = cardView.index
         cardView.bringToTop()
     }
 
@@ -39,6 +40,7 @@ class ViewZoomer(private val cardView: View, private val zoomLevel: Double = 1.5
             cardView.x = cardX!!
             cardView.y = cardY!!
             cardView.scale = cardScale!!
+            cardView.parent?.moveChildTo(cardView, zIndex!!)
         }
     }
 }
