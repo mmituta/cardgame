@@ -5,7 +5,11 @@ import fight.Enemy
 import fight.Fight
 import kotlin.random.Random
 
-class BlindSlashCard : Card(1, "Blind slash", "Attacks a random enemy for 3 DMG") {
+class BlindSlashCard : Card{
+    override val cost: Int = 1
+    override val name: String = "Blind slash"
+    override val description: String = "Attacks a random enemy for 3 DMG"
+
     override fun play(fight: Fight, cardPlayedCallback: CardPlayedCallback) {
         if (fight.enemies.isNotEmpty()) {
             fight.enemies[getEnemyIndex(fight.enemies)].hit(Attack("Slash", 3))
