@@ -10,11 +10,13 @@ import com.soywiz.korma.geom.Rectangle
 
 class CardView(val card: Card, bitmapRegistry: BitmapRegistry) : Container(){
 
+
     init {
         addChild(createBackground(bitmapRegistry.getCard()))
         addChild(createCostText())
         addChild(createNameText())
         addChild(createDescriptionText())
+
     }
 
     private fun createBackground(cardBitmap: Bitmap): Image {
@@ -24,9 +26,8 @@ class CardView(val card: Card, bitmapRegistry: BitmapRegistry) : Container(){
     }
 
     private fun createDescriptionText(): Text {
-        val description = Text(card.description, 8.0)
+        val description = WrappableText(card.description,  8.0)
         description.setTextBounds(Rectangle(0.0, 0.0, 94.0, 23.0))
-
         description.x = 8.0
         description.y = 105.0
         return description
